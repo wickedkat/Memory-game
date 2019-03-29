@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container ">
+    <div class="row justify-content-md-center align-items-center">
+
+        <div class="form-group pt20">
+            <form action="/start" method="post">
+                <label for="cards">How many different cards would you like to play?</label>
+                <select class="form-control" id="cards" name="cards">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                    <option>19</option>
+                    <option>20</option>
+                </select>
+                <br><br>
+                <label for="cards">Choose difficulty level</label>
+                <select class="form-control" id="level" name="level">
+                    <option>easy</option>
+                    <option>medium</option>
+                    <option>hard</option>
+                </select>
+                <div class="row justify-content-md-center align-items-center">
+                    <button type="submit" class="btn btn-success">Let's go</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

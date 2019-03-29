@@ -1,0 +1,135 @@
+const allInnerImages = ['fa-cat',
+    'fa-dragon',
+    'fa-paw',
+    'fa-dog',
+    'fa-bolt',
+    'fa-star',
+    'fa-moon',
+    'fa-snowflake',
+    'fa-sun',
+    'fa-campground',
+    'fa-apple-alt',
+    'fa-chess',
+    'fa-dove',
+    'fa-globe-americas',
+    'fa-plane',
+    'fa-wine-glass-alt',
+    'fa-anchor',
+    'fa-spa',
+    'fa-shuttle-van',
+    'fa-rainbow'];
+
+const backImage = 'fa-stroopwafel';
+const board = document.getElementsByClassName("card");
+let cardOneindex;
+let cardTwoindex;
+
+let shuffledDoubleImages = createShuffledImagesBoard(allInnerImages);
+game();
+
+/* GAME STATUSES :
+*  INITIAL - ready for first guess, zero cards flipped
+*  FIRSTSHOT - after first guess, one card flipped
+*  SECONDSHOT- after second guess, two cards flipped*/
+
+
+function game() {
+    for (let index = 0; index < board.length; index++) {
+        board[index].addEventListener("click", function () {
+            let unflippedCard = board[index].classList.contains(backImage);
+            let status = 'INITIAL';
+            if (status === 'INITIAL' && unflippedCard) {
+                initial(index);
+                status = 'FIRSTSHOT'
+            }
+            if (status === 'FIRSTSHOT' && unflippedCard) {
+                firstShot(index);
+                status = 'SECONDSHOT';
+            if (status === 'SECONDSHOT') {
+                secondShot(index)
+                }
+            }
+        });
+    }
+}
+
+function initial(index) {
+    cardOneindex = index;
+    uncoverCard(board[index], backImage, shuffledDoubleImages[index]);
+
+}
+
+function firstShot(index) {
+    cardTwoindex = index;
+    uncoverCard(board[index], backImage, shuffledDoubleImages[index]);
+
+
+}
+
+function secondShot(index) {
+    if (shuffledDoubleImages[cardOneindex] === shuffledDoubleImages[cardTwoindex]) {
+        checkWinCondidtion()
+    } else {
+        setTimeout(function () {
+            coverCard(board[cardOneindex], shuffledDoubleImages[cardOneindex], backImage);
+            turnCard(board[cardTwoindex], shuffledDoubleImages[cardTwoindex], backImage);
+            status = 'INITIAL'
+        }, 1200);
+    }
+
+}
+
+
+function checkWinCondidtion() {
+    let unflippedCards = document.getElementsByClassName(backImage);
+    if (unflippedCards.length === 0) {
+        alert('Congratulations')
+    } else {
+        status = 'INITIAL'
+    }
+}
+
+
+function turnCard(card, oldclass, newclass) {
+    card.classList.remove(oldclass);
+    card.classList.add(newclass);
+}
+
+
+function uncoverCard(card, oldclass, newclass) {
+    turnCard(card, oldclass, newclass)
+}
+
+
+function coverCard(card, oldclass, newclass) {
+    turnCard(card, oldclass, newclass)
+}
+
+
+/* shuffling images functions */
+
+function shuffle(myArray) {
+    for (let i = myArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [myArray[i], myArray[j]] = [myArray[j], myArray[i]];
+    }
+    return myArray;
+}
+
+
+function createShuffledImagesBoard(myArray) {
+    let boardSingleImages = [];
+    let shuffleAllImages = shuffle(myArray);
+    for (let i = 0; i < board.length / 2; i++) {
+        boardSingleImages.push(shuffleAllImages[i])
+    }
+    let doubledImages = boardSingleImages.slice(0);
+
+    for (let j = 0; j < boardSingleImages.length; j++) {
+        doubledImages.push(boardSingleImages[j])
+    }
+    return shuffle(doubledImages);
+};
+
+
+

@@ -1,0 +1,43 @@
+.form-group {
+    margin-top: 50px;
+}
+
+.btn {
+    margin-top: 15px;
+    color: whitesmoke;
+    background: royalblue;
+}
+
+.navbar {
+    color: whitesmoke;
+    background-color: royalblue;
+}
+.nav-item {
+    color: whitesmoke;
+}
+a:hover {
+    color:white;
+    text-decoration: none;
+    font-weight: bold;
+
+}
+
+
+.card {
+    text-align: center;
+    justify-content: center;
+    padding: 5px;
+    width: 80px;
+    height: 80px;
+    background-color: dodgerblue;
+    color: whitesmoke;
+    border: solid lightsteelblue;
+    font-size: 36px;
+
+}
+
+.card:hover {
+    border: solid ghostwhite;
+    color: white;
+}
+
